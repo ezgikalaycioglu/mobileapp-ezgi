@@ -1,0 +1,110 @@
+<LoginScreen>:
+    GridLayout:
+        cols: 1
+        GridLayout:
+            cols: 1
+            padding: 15, 15
+            spacing: 20, 20
+            Label: 
+                text: "Kullanıcı Girişi"
+                font_size: '20sp'
+            TextInput:
+                id: username
+                hint_text: "Username"
+            TextInput:
+                id: password
+                password: True
+                hint_text: "Password"
+            RelativeLayout:
+                ImageButton:
+                    on_press: root.login(root.ids.username.text, root.ids.password.text)
+                    source: '8.png' if self.hovered else "7.png"
+                    size_hint: 0.8, 0.8
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+            Label:
+                id: login_wrong
+                text: ""
+        GridLayout:
+            cols: 1
+            size_hint: 0.2, 0.2
+            padding: 10, 10
+            spacing: 10, 0
+            Button: 
+                background_color: 1, 1, 1, 0
+                opacity: 1 if self.state == 'normal' else 0.5
+                color: 0.1, 0.7, 1, 1
+                text: "Kayıt Ol"
+                on_press: root.sign_up()
+
+<SignUpScreen>:
+    GridLayout:
+        cols: 1
+        padding: 20, 20
+        spacing: 20, 20
+        Label:
+            text: "Başlamak İçin Kaydol"
+        TextInput:
+            id: username
+            hint_text: "Username"
+        TextInput:
+            id: password
+            hint_text: "Password"
+            password: True
+        ImageButton:
+            on_press: root.add_user(root.ids.username.text, root.ids.password.text)
+            source: '10.png' if self.hovered else "9.png"
+<SignUpScreenSuccess>:
+    GridLayout:
+        cols: 1
+        ImageButton:
+            on_press: root.go_to_login()
+            source: '12.png' if self.hovered else "11.png"
+
+<LoginScreenSuccess>:
+    GridLayout:
+        cols: 1
+        GridLayout:
+            cols: 1
+            padding: 30, 30
+            spacing: 30, 30
+            RelativeLayout:
+                ImageButton: 
+                    on_press: root.log_out()
+                    source: '6.png' if self.hovered else "5.png"
+                    size_hint: 0.5, 0.5
+                    pos_hint: {'center_x': 0.80, 'center_y': 0.8}
+        GridLayout:
+            cols:1
+            size_hint: 0.2 , 0.2
+            Label:
+                text: "Şarkı veya hatırlatıcı butonuna bas"
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        GridLayout:
+            cols:2
+            padding: 30, 30
+            spacing: 30, 30
+            ImageButton:
+                on_press: root.get_song()
+                source: '2.png' if self.hovered else "1.png"
+            ImageButton:
+                on_press: root.get_quote()
+                source: '4.png' if self.hovered else "3.png"
+        ScrollView:
+            Label:
+                id: quote
+                text: ""
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
+
+<RootWidget>:
+    LoginScreen:
+        name: "login_screen"
+    SignUpScreen:
+        name: "sign_up_screen"
+    SignUpScreenSuccess:
+        name: "sign_up_screen_success"
+    LoginScreenSuccess:
+        name: "login_screeen_success"
+
+            
